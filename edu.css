@@ -1,315 +1,196 @@
 /* ═══════════════════════════════════════════════════════════════
-   🌌  EDU — GALAXY THEME  |  gamepadviewer.com Custom CSS
+   🌌  EDU — GALAXY THEME  |  gamepadviewer Custom CSS
+       Every rule uses .custom prefix — required by GPV!
    ═══════════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
 
-/* ── Global / Page ─────────────────────────────────────────── */
-body {
-  background: transparent !important;
-}
-
-/* ── Starfield keyframes ────────────────────────────────────── */
-@keyframes twinkle {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.2; }
-}
-@keyframes galaxyShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+/* ─── Animations ────────────────────────────────────────────── */
 @keyframes nameGlow {
   0%, 100% {
     text-shadow:
       0 0 6px #fff,
       0 0 14px #a78bfa,
-      0 0 28px #7c3aed,
-      0 0 50px #4f46e5;
-    letter-spacing: 6px;
+      0 0 30px #7c3aed,
+      0 0 55px #4f46e5;
   }
   50% {
     text-shadow:
       0 0 10px #fff,
       0 0 24px #f472b6,
-      0 0 48px #9333ea,
-      0 0 80px #6366f1;
-    letter-spacing: 8px;
+      0 0 50px #9333ea,
+      0 0 85px #6366f1;
   }
 }
-@keyframes outerRing {
-  0%   { box-shadow: 0 0 0 2px rgba(167,139,250,0.5),
-                     0 0 20px 4px rgba(99,102,241,0.4); }
-  50%  { box-shadow: 0 0 0 3px rgba(244,114,182,0.7),
-                     0 0 35px 8px rgba(168,85,247,0.5); }
-  100% { box-shadow: 0 0 0 2px rgba(167,139,250,0.5),
-                     0 0 20px 4px rgba(99,102,241,0.4); }
+@keyframes galaxyGlow {
+  0%, 100% {
+    filter:
+      hue-rotate(250deg)
+      saturate(3)
+      brightness(0.75)
+      drop-shadow(0 0 18px rgba(139,92,246,0.9))
+      drop-shadow(0 0 40px rgba(80,40,200,0.6))
+      drop-shadow(0 0 70px rgba(200,100,255,0.3));
+  }
+  50% {
+    filter:
+      hue-rotate(280deg)
+      saturate(3.5)
+      brightness(0.8)
+      drop-shadow(0 0 22px rgba(244,114,182,0.9))
+      drop-shadow(0 0 50px rgba(168,85,247,0.6))
+      drop-shadow(0 0 90px rgba(99,102,241,0.35));
+  }
 }
-@keyframes pressedBurst {
-  0%   { filter: brightness(1) drop-shadow(0 0 4px #a78bfa); }
-  50%  { filter: brightness(1.8) drop-shadow(0 0 14px #f472b6)
-                                 drop-shadow(0 0 28px #7c3aed); }
-  100% { filter: brightness(1) drop-shadow(0 0 4px #a78bfa); }
+@keyframes buttonPulse {
+  0%, 100% { filter: hue-rotate(250deg) saturate(3) brightness(0.8); }
+  50%       { filter: hue-rotate(280deg) saturate(4) brightness(1.4)
+                      drop-shadow(0 0 10px rgba(244,114,182,1)); }
+}
+@keyframes triggerFill {
+  0%, 100% { filter: hue-rotate(240deg) saturate(3) brightness(0.7); }
+  50%       { filter: hue-rotate(260deg) saturate(4) brightness(1.2); }
 }
 @keyframes stickGlow {
-  0%, 100% { box-shadow: 0 0 8px 2px rgba(139,92,246,0.6); }
-  50%       { box-shadow: 0 0 16px 6px rgba(244,114,182,0.7); }
-}
-@keyframes triggerPulse {
-  0%, 100% { opacity: 0.85; }
-  50%       { opacity: 1; filter: brightness(1.4); }
+  0%, 100% { filter: hue-rotate(250deg) saturate(3) brightness(0.75)
+                     drop-shadow(0 0 6px rgba(139,92,246,0.8)); }
+  50%       { filter: hue-rotate(280deg) saturate(4) brightness(0.9)
+                     drop-shadow(0 0 14px rgba(244,114,182,0.9)); }
 }
 
 
-/* ══════════════════════════════════════════════════════════════
-   CONTROLLER WRAPPER — galaxy body
-══════════════════════════════════════════════════════════════ */
-#controller-container,
-.controller-container,
-.gamepad-container,
-.gamepad-wrapper {
-  position: relative;
-}
-
-/* The main controller shape */
-#controller,
-.controller,
-.gamepad {
-  background:
-    radial-gradient(ellipse at 20% 30%,  rgba(139,92,246,0.35)  0%, transparent 55%),
-    radial-gradient(ellipse at 80% 20%,  rgba(59,130,246,0.30)  0%, transparent 50%),
-    radial-gradient(ellipse at 60% 80%,  rgba(244,114,182,0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 10% 80%,  rgba(16,185,129,0.15)  0%, transparent 45%),
-    linear-gradient(135deg, #0a0015 0%, #0d0a2e 30%, #0f0520 60%, #06001a 100%) !important;
-  background-size: 200% 200% !important;
-  animation: galaxyShift 12s ease infinite !important;
-  border-radius: 40px !important;
-  outline: 1px solid rgba(139,92,246,0.3) !important;
-  animation: galaxyShift 12s ease infinite, outerRing 4s ease-in-out infinite !important;
-  filter:
-    drop-shadow(0 0 18px rgba(120,80,255,0.7))
-    drop-shadow(0 0 45px rgba(80,40,200,0.4))
-    drop-shadow(0 0 80px rgba(200,100,255,0.2)) !important;
-}
-
-
-/* ══════════════════════════════════════════════════════════════
-   "EDU" NAME — centre of the controller (touchpad area)
-══════════════════════════════════════════════════════════════ */
-
-/* Target the touchpad / centre area used by gamepadviewer */
-.touchpad,
-#touchpad,
-.ps4-touchpad,
-[class*="touchpad"],
-[class*="touch-pad"] {
+/* ═══════════════════════════════════════════════════════════════
+   CONTROLLER BODY
+   hue-rotate(250-280deg) shifts the PS4 grey → deep purple/galaxy
+═══════════════════════════════════════════════════════════════ */
+.controller.custom {
+  animation: galaxyGlow 5s ease-in-out infinite !important;
   position: relative !important;
-  overflow: visible !important;
 }
 
-.touchpad::after,
-#touchpad::after,
-.ps4-touchpad::after,
-[class*="touchpad"]::after,
-[class*="touch-pad"]::after {
-  content: 'edu';
-  font-family: 'Orbitron', monospace !important;
-  font-weight: 900 !important;
-  font-size: 13px !important;
-  color: #fff !important;
-  text-transform: uppercase !important;
-  letter-spacing: 6px !important;
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  z-index: 999 !important;
-  pointer-events: none !important;
-  animation: nameGlow 3s ease-in-out infinite !important;
-  white-space: nowrap !important;
+/* When disconnected */
+.custom.disconnected {
+  filter: hue-rotate(260deg) saturate(1.5) brightness(0.4) !important;
+}
+.custom.disconnected div {
+  display: none;
 }
 
-/* ── Fallback: inject via the controller body centre ─────────
-   (covers skins that don't expose a .touchpad element)       */
-#controller::after,
-.controller::after,
-.gamepad::after {
-  content: 'edu';
+
+/* ═══════════════════════════════════════════════════════════════
+   "EDU" NAME — floating above the centre (touchpad region)
+═══════════════════════════════════════════════════════════════ */
+.controller.custom::after {
+  content: 'EDU';
   font-family: 'Orbitron', monospace !important;
   font-weight: 900 !important;
-  font-size: 15px !important;
-  color: #fff !important;
-  text-transform: uppercase !important;
+  font-size: 14px !important;
+  color: #ffffff !important;
   letter-spacing: 6px !important;
   position: absolute !important;
-  /* ~centre of a typical PS4 layout */
-  top: 42% !important;
+  top:  46% !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 9999 !important;
   pointer-events: none !important;
   animation: nameGlow 3s ease-in-out infinite !important;
   white-space: nowrap !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+/* Hide the default player-number dots */
+.custom .quadrant {
+  opacity: 0 !important;
 }
 
 
-/* ══════════════════════════════════════════════════════════════
-   BUTTONS — Cross / Circle / Square / Triangle
-══════════════════════════════════════════════════════════════ */
-.button,
-.btn,
-[class*="button"],
-.face-button {
-  transition: filter 0.1s ease, transform 0.1s ease !important;
-  filter: drop-shadow(0 0 4px rgba(167,139,250,0.6)) !important;
+/* ═══════════════════════════════════════════════════════════════
+   TRIGGERS  (L2 / R2)
+═══════════════════════════════════════════════════════════════ */
+.custom .trigger {
+  filter: hue-rotate(250deg) saturate(3) brightness(0.7) !important;
+  transition: filter 0.1s ease !important;
+}
+.custom .trigger.pressed {
+  animation: triggerFill 0.3s ease !important;
+  filter: hue-rotate(270deg) saturate(4) brightness(1.3)
+          drop-shadow(0 0 12px rgba(139,92,246,1)) !important;
 }
 
-/* Cross (×) — electric blue */
-.button-cross, .cross, [class*="cross"],
-.btn-cross, .button.cross {
-  background: radial-gradient(circle, #60a5fa 0%, #1d4ed8 60%, #172554 100%) !important;
-  border-color: #93c5fd !important;
-  box-shadow: 0 0 8px #3b82f6, 0 0 20px rgba(59,130,246,0.4) !important;
+/* ─── BUMPERS (L1 / R1) ─────────────────────────────────────── */
+.custom .bumper {
+  filter: hue-rotate(250deg) saturate(3) brightness(0.7) !important;
+  transition: filter 0.1s ease !important;
 }
-/* Circle (○) — hot pink */
-.button-circle, .circle, [class*="circle"],
-.btn-circle, .button.circle {
-  background: radial-gradient(circle, #f472b6 0%, #be185d 60%, #500724 100%) !important;
-  border-color: #fbcfe8 !important;
-  box-shadow: 0 0 8px #ec4899, 0 0 20px rgba(236,72,153,0.4) !important;
-}
-/* Square (□) — violet */
-.button-square, .square, [class*="square"],
-.btn-square, .button.square {
-  background: radial-gradient(circle, #a78bfa 0%, #7c3aed 60%, #2e1065 100%) !important;
-  border-color: #ddd6fe !important;
-  box-shadow: 0 0 8px #8b5cf6, 0 0 20px rgba(139,92,246,0.4) !important;
-}
-/* Triangle (△) — cosmic teal */
-.button-triangle, .triangle, [class*="triangle"],
-.btn-triangle, .button.triangle {
-  background: radial-gradient(circle, #34d399 0%, #059669 60%, #022c22 100%) !important;
-  border-color: #a7f3d0 !important;
-  box-shadow: 0 0 8px #10b981, 0 0 20px rgba(16,185,129,0.4) !important;
-}
-
-/* Pressed state — burst of light */
-.button.pressed,
-.button.active,
-[class*="button"].pressed,
-[class*="button"].active {
-  animation: pressedBurst 0.25s ease !important;
-  transform: scale(0.92) !important;
-  filter: brightness(2) !important;
+.custom .bumper.pressed {
+  filter: hue-rotate(270deg) saturate(4) brightness(1.4)
+          drop-shadow(0 0 10px rgba(167,139,250,1)) !important;
 }
 
 
-/* ══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════
+   FACE BUTTONS  (×  ○  □  △)
+═══════════════════════════════════════════════════════════════ */
+.custom .button {
+  filter: hue-rotate(250deg) saturate(3) brightness(0.85) !important;
+  transition: filter 0.1s ease !important;
+}
+.custom .button.pressed {
+  animation: buttonPulse 0.25s ease !important;
+  filter: hue-rotate(280deg) saturate(4) brightness(1.6)
+          drop-shadow(0 0 14px rgba(244,114,182,1)) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
    D-PAD
-══════════════════════════════════════════════════════════════ */
-.dpad,
-#dpad,
-[class*="dpad"],
-[class*="d-pad"] {
-  background:
-    radial-gradient(ellipse at center, #1e1b4b 0%, #0a0015 100%) !important;
-  border: 1px solid rgba(139,92,246,0.5) !important;
-  box-shadow: 0 0 10px rgba(99,102,241,0.4) !important;
-  filter: drop-shadow(0 0 6px rgba(99,102,241,0.5)) !important;
+═══════════════════════════════════════════════════════════════ */
+.custom .dpad {
+  filter: hue-rotate(250deg) saturate(3) brightness(0.75) !important;
+  transition: filter 0.1s ease !important;
 }
-.dpad.pressed,
-[class*="dpad"].pressed {
-  background:
-    radial-gradient(ellipse at center, #4338ca 0%, #1e1b4b 100%) !important;
-  filter: drop-shadow(0 0 12px rgba(139,92,246,0.9)) !important;
+.custom .face.pressed,
+.custom .dpad .face.pressed {
+  filter: hue-rotate(270deg) saturate(4) brightness(1.4)
+          drop-shadow(0 0 8px rgba(139,92,246,1)) !important;
 }
 
 
-/* ══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════
    ANALOG STICKS
-══════════════════════════════════════════════════════════════ */
-.stick,
-.analog,
-.thumbstick,
-[class*="stick"],
-[class*="analog"] {
-  background:
-    radial-gradient(circle at 35% 30%,
-      #6d28d9 0%, #3730a3 40%, #0a0015 100%) !important;
-  border: 2px solid rgba(167,139,250,0.6) !important;
-  animation: stickGlow 3s ease-in-out infinite !important;
+═══════════════════════════════════════════════════════════════ */
+.custom .stick {
+  animation: stickGlow 4s ease-in-out infinite !important;
 }
-.stick .inner,
-.analog .inner,
-.thumbstick .inner,
-[class*="stick"] .inner {
-  background:
-    radial-gradient(circle at 35% 30%,
-      #a78bfa 0%, #4c1d95 60%, #1e0050 100%) !important;
-  border: 1px solid rgba(196,181,253,0.5) !important;
+.custom .stick.pressed {
+  filter: hue-rotate(270deg) saturate(4) brightness(1.5)
+          drop-shadow(0 0 12px rgba(167,139,250,1)) !important;
 }
 
 
-/* ══════════════════════════════════════════════════════════════
-   TRIGGERS (L2 / R2) & BUMPERS (L1 / R1)
-══════════════════════════════════════════════════════════════ */
-.trigger,
-.bumper,
-[class*="trigger"],
-[class*="bumper"],
-.l1, .r1, .l2, .r2,
-[class*="l1"], [class*="r1"],
-[class*="l2"], [class*="r2"] {
-  background:
-    linear-gradient(135deg, #312e81 0%, #1e1b4b 50%, #0a0015 100%) !important;
-  border: 1px solid rgba(99,102,241,0.5) !important;
-  box-shadow: 0 0 8px rgba(99,102,241,0.3) !important;
-  transition: filter 0.1s ease, background 0.1s ease !important;
+/* ═══════════════════════════════════════════════════════════════
+   OPTIONS / SHARE / TOUCHPAD BUTTONS
+═══════════════════════════════════════════════════════════════ */
+.custom .back,
+.custom .start {
+  filter: hue-rotate(250deg) saturate(3) brightness(0.8) !important;
+  transition: filter 0.1s ease !important;
 }
-.trigger.pressed, .bumper.pressed,
-[class*="trigger"].pressed, [class*="bumper"].pressed,
-.l2.pressed, .r2.pressed {
-  background:
-    linear-gradient(135deg, #6d28d9 0%, #4338ca 50%, #1e1b4b 100%) !important;
-  animation: triggerPulse 0.3s ease !important;
-  filter: drop-shadow(0 0 12px rgba(139,92,246,0.9)) !important;
+.custom .back.pressed,
+.custom .start.pressed {
+  filter: hue-rotate(270deg) saturate(4) brightness(1.5)
+          drop-shadow(0 0 10px rgba(167,139,250,1)) !important;
 }
 
-
-/* ══════════════════════════════════════════════════════════════
-   OPTIONS / SHARE / PS BUTTON
-══════════════════════════════════════════════════════════════ */
-.options, .start, .menu,
-[class*="options"], [class*="share"],
-.ps-button, [class*="ps-button"],
-[class*="home"] {
-  background:
-    radial-gradient(circle, #7c3aed 0%, #1e1b4b 100%) !important;
-  border-color: rgba(167,139,250,0.5) !important;
-  box-shadow: 0 0 8px rgba(124,58,237,0.5) !important;
+/* PS / Home button */
+.custom .home,
+.custom .ps {
+  filter: hue-rotate(250deg) saturate(3) brightness(0.8) !important;
+  transition: filter 0.1s ease !important;
 }
-.options.pressed, .ps-button.pressed,
-[class*="options"].pressed, [class*="home"].pressed {
-  filter: brightness(1.8) drop-shadow(0 0 14px #a78bfa) !important;
-}
-
-
-/* ══════════════════════════════════════════════════════════════
-   DECORATIVE STAR PARTICLES (pure CSS, no JS)
-══════════════════════════════════════════════════════════════ */
-#controller::before,
-.controller::before,
-.gamepad::before {
-  content: '· · ✦ · · ✧ · · ✦ · ·';
-  position: absolute !important;
-  top: 6px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  font-size: 8px !important;
-  color: rgba(196,181,253,0.5) !important;
-  letter-spacing: 3px !important;
-  z-index: 9998 !important;
-  pointer-events: none !important;
-  animation: twinkle 2.5s ease-in-out infinite !important;
-  white-space: nowrap !important;
+.custom .home.pressed,
+.custom .ps.pressed {
+  filter: hue-rotate(270deg) saturate(4) brightness(1.8)
+          drop-shadow(0 0 16px rgba(244,114,182,1)) !important;
 }
