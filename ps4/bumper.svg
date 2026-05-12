@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 23" width="89" height="23">
+  <defs>
+    <linearGradient id="bumpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Bumper bar shape -->
+  <path d="M 2,22 L 2,10 C 2,5 6,2 11,2 L 78,2 C 83,2 87,5 87,10 L 87,22 Z"
+        fill="url(#bumpGrad)" stroke="#c4b5fd" stroke-width="1.2" filter="url(#glow)"/>
+  <!-- Shine line -->
+  <line x1="10" y1="6" x2="79" y2="6" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="130" height="130">
+  <defs>
+    <linearGradient id="dpadGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#3730a3"/>
+    </linearGradient>
+    <radialGradient id="dpadCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- D-pad cross shape -->
+  <!-- Up -->
+  <path d="M 46,2 L 84,2 L 84,46 L 46,46 Z" rx="6"
+        fill="url(#dpadGrad)" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- Down -->
+  <path d="M 46,84 L 84,84 L 84,128 L 46,128 Z"
+        fill="url(#dpadGrad)" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- Left -->
+  <path d="M 2,46 L 46,46 L 46,84 L 2,84 Z"
+        fill="url(#dpadGrad)" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- Right -->
+  <path d="M 84,46 L 128,46 L 128,84 L 84,84 Z"
+        fill="url(#dpadGrad)" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- Centre square -->
+  <rect x="46" y="46" width="38" height="38" fill="url(#dpadCenter)" stroke="#c4b5fd" stroke-width="1"/>
+
+  <!-- Corner fills (rounded cross effect) -->
+  <rect x="2"   y="2"   width="44" height="44" fill="#0a0015" rx="6"/>
+  <rect x="84"  y="2"   width="44" height="44" fill="#0a0015" rx="6"/>
+  <rect x="2"   y="84"  width="44" height="44" fill="#0a0015" rx="6"/>
+  <rect x="84"  y="84"  width="44" height="44" fill="#0a0015" rx="6"/>
+
+  <!-- Arrow indicators -->
+  <!-- Up arrow -->
+  <polygon points="65,12 72,28 58,28" fill="white" opacity="0.7"/>
+  <!-- Down arrow -->
+  <polygon points="65,118 72,102 58,102" fill="white" opacity="0.7"/>
+  <!-- Left arrow -->
+  <polygon points="12,65 28,58 28,72" fill="white" opacity="0.7"/>
+  <!-- Right arrow -->
+  <polygon points="118,65 102,58 102,72" fill="white" opacity="0.7"/>
+
+  <!-- Glow overlay -->
+  <path d="M 46,2 L 84,2 L 84,46 L 128,46 L 128,84 L 84,84 L 84,128 L 46,128 L 46,84 L 2,84 L 2,46 L 46,46 Z"
+        fill="none" stroke="#8b5cf6" stroke-width="2" filter="url(#glow)" opacity="0.6"/>
+</svg>

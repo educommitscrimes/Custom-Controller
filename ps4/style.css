@@ -1,0 +1,280 @@
+/* ═══════════════════════════════════════════════════════════════
+   🌌  EDU — GALAXY THEME  |  beta.gamepadviewer.com
+       Complete custom skin — place alongside your SVG files
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
+
+/* ─── Animations ────────────────────────────────────────────── */
+@keyframes nameGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 6px #fff,
+      0 0 14px #a78bfa,
+      0 0 32px #7c3aed,
+      0 0 60px #4f46e5;
+    letter-spacing: 7px;
+  }
+  50% {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 26px #f472b6,
+      0 0 55px #9333ea,
+      0 0 90px #6366f1;
+    letter-spacing: 9px;
+  }
+}
+@keyframes outerGlow {
+  0%, 100% { box-shadow: 0 0 20px 4px rgba(139,92,246,0.7), 0 0 50px 10px rgba(80,40,200,0.4); }
+  50%       { box-shadow: 0 0 30px 8px rgba(244,114,182,0.8), 0 0 70px 15px rgba(168,85,247,0.5); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 0.15; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CONTROLLER BODY  —  base.svg as background
+   All child elements are positioned absolutely on top of it.
+═══════════════════════════════════════════════════════════════ */
+.controller.custom {
+  background: url(base.svg) no-repeat center center !important;
+  background-size: contain !important;
+  width:  806px !important;
+  height: 500px !important;
+  position: relative !important;
+  /* Galaxy glow around the whole shell */
+  filter:
+    hue-rotate(250deg)
+    saturate(2.8)
+    brightness(0.72)
+    drop-shadow(0 0 18px rgba(139,92,246,0.9))
+    drop-shadow(0 0 45px rgba(80,40,200,0.55))
+    drop-shadow(0 0 80px rgba(200,100,255,0.3)) !important;
+  animation: outerGlow 5s ease-in-out infinite !important;
+}
+
+/* Disconnected state */
+.custom.disconnected {
+  background: url(disconnected.svg) no-repeat center center !important;
+  background-size: contain !important;
+  filter: hue-rotate(260deg) saturate(1.5) brightness(0.35) !important;
+}
+.custom.disconnected div { display: none !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   "EDU" NAME — centre of the controller (over touchpad area)
+   isolation: isolate undoes the parent filter so the text stays white
+═══════════════════════════════════════════════════════════════ */
+.controller.custom::after {
+  content: 'EDU';
+  display: block !important;
+  font-family: 'Orbitron', monospace !important;
+  font-weight: 900 !important;
+  font-size: 15px !important;
+  color: #ffffff !important;
+  letter-spacing: 7px !important;
+  text-transform: uppercase !important;
+  position: absolute !important;
+  /* Touchpad centre — ~halfway down, horizontally centred */
+  top:  44% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+  white-space: nowrap !important;
+  /* Cancel out parent hue-rotate so the text reads white, not purple */
+  filter: hue-rotate(110deg) saturate(0) brightness(3.5) !important;
+  animation: nameGlow 3s ease-in-out infinite !important;
+}
+
+/* Decorative star row above the name */
+.controller.custom::before {
+  content: '✦ · · · ✧ · · · ✦';
+  display: block !important;
+  position: absolute !important;
+  top: 37% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  font-size: 7px !important;
+  letter-spacing: 4px !important;
+  color: rgba(196,181,253,0.6) !important;
+  filter: hue-rotate(110deg) saturate(0) brightness(2.5) !important;
+  animation: twinkle 3s ease-in-out infinite !important;
+  pointer-events: none !important;
+  z-index: 9998 !important;
+  white-space: nowrap !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TRIGGERS  (L2 / R2)
+═══════════════════════════════════════════════════════════════ */
+.custom .triggers {
+  position: absolute !important;
+  width:  587px !important;
+  height: 85px !important;
+  left:   110px !important;
+  top:    0 !important;
+}
+.custom .trigger {
+  width:   96px !important;
+  height:  85px !important;
+  background: url(triggers.svg) no-repeat !important;
+  opacity: 0 !important;
+  transition: opacity 0.05s ease !important;
+}
+.custom .trigger.pressed {
+  opacity: 1 !important;
+}
+.custom .trigger.left  { float: left !important; }
+.custom .trigger.right { float: right !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BUMPERS  (L1 / R1)
+═══════════════════════════════════════════════════════════════ */
+.custom .bumpers {
+  position: absolute !important;
+  width:  588px !important;
+  height: 23px !important;
+  left:   109px !important;
+  top:    94px !important;
+}
+.custom .bumper {
+  width:   89px !important;
+  height:  23px !important;
+  background: url(bumper.svg) no-repeat !important;
+  opacity: 0 !important;
+  transition: opacity 0.05s ease !important;
+}
+.custom .bumper.pressed { opacity: 1 !important; }
+.custom .bumper.left    { float: left !important; }
+.custom .bumper.right   { float: right !important; transform: rotateY(180deg) !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FACE BUTTONS  (×  ○  □  △)
+═══════════════════════════════════════════════════════════════ */
+.custom .buttons {
+  position: absolute !important;
+  width:  200px !important;
+  height: 200px !important;
+  right:  67px !important;
+  top:    128px !important;
+}
+.custom .button {
+  background: url(face.svg) no-repeat !important;
+  width:  50px !important;
+  height: 50px !important;
+  position: absolute !important;
+  opacity: 0 !important;
+  transition: opacity 0.05s ease !important;
+}
+/* Sprite offsets — each button is a quadrant in face.svg */
+.custom .button.cross    { background-position:   0   50px !important; bottom: 0; left:  50px; }
+.custom .button.circle   { background-position: -50px    0  !important; top:  50px; right:  0; }
+.custom .button.square   { background-position:   0     0  !important; top:  50px; left:   0; }
+.custom .button.triangle { background-position: -50px  50px !important; top:   0; left:  50px; }
+.custom .button.pressed  { opacity: 1 !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   D-PAD
+═══════════════════════════════════════════════════════════════ */
+.custom .dpad {
+  position: absolute !important;
+  width:  130px !important;
+  height: 130px !important;
+  left:   142px !important;
+  bottom: 130px !important;
+}
+.custom .dpad .face {
+  background: url(dpad.svg) no-repeat !important;
+  position: absolute !important;
+  opacity: 0 !important;
+  transition: opacity 0.05s ease !important;
+}
+.custom .dpad .face.pressed { opacity: 1 !important; }
+/* Dpad directions */
+.custom .dpad .up    { width: 44px; height: 44px; top: 0;   left: 43px; background-position: -43px 0; }
+.custom .dpad .down  { width: 44px; height: 44px; bottom: 0; left: 43px; background-position: -43px -86px; }
+.custom .dpad .left  { width: 44px; height: 44px; top: 43px; left: 0;   background-position: 0 -43px; }
+.custom .dpad .right { width: 44px; height: 44px; top: 43px; right: 0;  background-position: -86px -43px; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ANALOG STICKS
+═══════════════════════════════════════════════════════════════ */
+.custom .sticks {
+  position: absolute !important;
+  width:  100% !important;
+  height: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+.custom .stick {
+  background: url(sticks.svg) no-repeat !important;
+  position: absolute !important;
+  width:  85px !important;
+  height: 85px !important;
+}
+.custom .stick.left  { left:  218px !important; top: 195px !important; }
+.custom .stick.right { right: 190px !important; top: 260px !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TOUCHPAD  (centre pad — also where EDU text sits)
+═══════════════════════════════════════════════════════════════ */
+.custom .touchpad {
+  position: absolute !important;
+  width:  262px !important;
+  height: 151px !important;
+  left:   272px !important;
+  top:    120px !important;
+}
+.custom .touchpad.pressed {
+  background: url(touchpad.svg) no-repeat center !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   OPTIONS / SHARE  (start / back buttons)
+═══════════════════════════════════════════════════════════════ */
+.custom .arrows {
+  position: absolute !important;
+  width:  205px !important;
+  height: 30px !important;
+  top:    198px !important;
+  left:   300px !important;
+}
+.custom .back,
+.custom .start {
+  background: url(start.svg) no-repeat !important;
+  width:   30px !important;
+  height:  30px !important;
+  opacity: 0 !important;
+  transition: opacity 0.05s ease !important;
+}
+.custom .back.pressed,
+.custom .start.pressed { opacity: 1 !important; }
+.custom .back  { float: left !important; }
+.custom .start { float: right !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PS / META BUTTON  (home button)
+═══════════════════════════════════════════════════════════════ */
+.custom .meta {
+  background: url(meta.svg) no-repeat center !important;
+  position: absolute !important;
+  width:  42px !important;
+  height: 42px !important;
+  left:   382px !important;
+  bottom: 80px !important;
+  opacity: 0 !important;
+  transition: opacity 0.05s ease !important;
+}
+.custom .meta.pressed { opacity: 1 !important; }
